@@ -4,7 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { userLoginReducer, userRegisterReducer } from './Reducers/userReducer'
 
 
-const reduser = combineReducers({
+const reducer = combineReducers({
     userLogin : userLoginReducer,
     userRegister : userRegisterReducer,
 })
@@ -17,7 +17,7 @@ const inisialState = {
 }
 const middlware = [thunk]
 
-const store = createStore(reduser, inisialState, 
+const store = createStore(reducer, inisialState, 
     composeWithDevTools(applyMiddleware(...middlware)))
 
 export default store

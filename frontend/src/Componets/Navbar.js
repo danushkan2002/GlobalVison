@@ -1,7 +1,9 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { logout } from '../Actions/userAction'
+import {  useLocation, useNavigate } from 'react-router-dom'
+
 
 const Navbar = () => {
     const userLogin = useSelector(state => state.userLogin)
@@ -11,10 +13,11 @@ const Navbar = () => {
     const logoutHandler = () => {
         dispatch(logout())
     }
+
   return (
     <div className='flex font-bold text-xl px-5 py-5 bg-slate-200'>
         <div className='flex justify-start'>
-            { userInfo ?(
+            { userInfo ? (
                 <div>
                 <button className='px-2' onClick={logoutHandler}> Logout</button>
                 </div>

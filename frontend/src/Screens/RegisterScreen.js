@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react'
 import {  useLocation, useNavigate } from 'react-router-dom'
 import { register } from '../Actions/userAction'
 import { useDispatch, useSelector } from 'react-redux'
+import Loader from '../Componets/Loader'
+import Message from '../Componets/Message'
 
 
 const RegisterScreen = () => {
@@ -16,11 +18,11 @@ const RegisterScreen = () => {
   const redirect = location.search ? location.search.split('=')[1]: '/'
 
     const userRegister = useSelector(state => state.userRegister)
-    const {userInfo } = userRegister
+    const {userInfo, error, loading } = userRegister
 
     useEffect(()=> {
       if (userInfo) {
-          history(redirect)
+          history('/')
       }
   }, [history, userInfo, redirect])
 
@@ -31,6 +33,8 @@ const RegisterScreen = () => {
   return (
     <div className='font-ms'>
       <p className='text-4xl px-5 mt-10'>Register</p>
+      {error && <Message>{error}</Message>}
+      {loading && <Loader/>}
       <form onSubmit={submitHandler}>
         <input type={'text'} className='border my-5 mx-2' value={username} placeholder={username} onChange={(e) => setUsername(e.target.value) }></input>
         <input type={'number'} className='border my-5 mx-2' value={birth_year} placeholder={birth_year} onChange={(e) => setBirth_year(e.target.value) }></input>
