@@ -1,46 +1,86 @@
 import React, {useState, useEffect} from 'react'
-import {  useLocation, useNavigate } from 'react-router-dom'
 import { register } from '../Actions/userAction'
+import { getSchoolDetails } from '../Actions/getAction'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../Componets/Loader'
 import Message from '../Componets/Message'
 
-
 const RegisterScreen = () => {
   const [username, setUsername] = useState('')
   const [birth_year, setBirth_year] = useState('')
+  const [student_id, setStudent_id] = useState('')
+  const [school_name, setSchool_name] = useState('')
+  const [phone_number, setPhone_number] = useState('')
   const [password, setPassword] = useState('')
-  const location = useLocation()
-  const history = useNavigate()
-
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [load, setLoad] = useState(true)
+  const [message, setMessage] = useState('')
   const dispatch = useDispatch()
 
-  const redirect = location.search ? location.search.split('=')[1]: '/'
+  const history = useNavigate()
 
-    const userRegister = useSelector(state => state.userRegister)
-    const {userInfo, error, loading } = userRegister
+  const userRegister = useSelector(state => state.userRegister)
+    const {loading, error } = userRegister
 
-    useEffect(()=> {
-      if (userInfo) {
-          history('/')
-      }
-  }, [history, userInfo, redirect])
+    const getSchool = useSelector(state => state.getSchool)
+    const {schoolDetailsLoading, schoolDetailsError , schoolDetails} = getSchool
+
+  useEffect(() => {
+    if (load)  {
+      dispatch(getSchoolDetails('get/school'))
+      setLoad(false)
+    } else {
+
+    }
+  },[dispatch, load])
+    
 
   const submitHandler = (e) => {
     e.preventDefault()
-    dispatch(register(username, parseInt(birth_year), password))
+    if (password !== confirmPassword) {
+      setMessage('Passwords do not match')
+    } else {
+      dispatch(register(username, parseInt(birth_year), student_id , school_name, phone_number, password)) 
+      history('/')
+    }
+    
   }
   return (
     <div className='font-ms'>
       <p className='text-4xl px-5 mt-10'>Register</p>
-      {error && <Message>{error}</Message>}
       {loading && <Loader/>}
-      <form onSubmit={submitHandler}>
-        <input type={'text'} className='border my-5 mx-2' value={username} placeholder={username} onChange={(e) => setUsername(e.target.value) }></input>
-        <input type={'number'} className='border my-5 mx-2' value={birth_year} placeholder={birth_year} onChange={(e) => setBirth_year(e.target.value) }></input>
-        <input type={'password'} className='border my-5 mx-2' value={password} placeholder={password} onChange={(e) => setPassword(e.target.value) }></input>
-        <button className='border px-4 bg-black text-white ' type={'submit'}>login</button>
-      </form>
+      {message && <Message>{message}</Message>}
+      {error && <Message>{error}</Message>}
+      {
+        schoolDetailsLoading ?
+          (<Loader/>) :
+          schoolDetailsError ? 
+            (<Message>{schoolDetailsError}</Message>) :
+              (
+                <form onSubmit={submitHandler}>
+                    <input type={'text'} className='border my-5 mx-2' value={username} placeholder={'Username'} onChange={(e) => setUsername(e.target.value) }></input>
+                    <input type={'number'} className='border my-5 mx-2' value={birth_year} placeholder={"Birthday Year"} onChange={(e) => setBirth_year(e.target.value) }></input>
+                    <input type={'text'} className='border my-5 mx-2' value={student_id} placeholder={'student_id'} onChange={(e) => setStudent_id(e.target.value) }></input>
+                    <select className='border my-5 mx-2' value={school_name} onChange={(e) => setSchool_name(e.target.value) }>
+                            <option defaultValue={true}>select somethio</option>
+                            { 
+                              schoolDetails.map((school) => (
+                                <option key={school.id} value={school.school_name}>{school.school_name}</option>))
+                            }
+                          </select>
+                          
+                    <input type={'text'} className='border my-5 mx-2' value={phone_number} placeholder={'Phone number'} onChange={(e) => setPhone_number(e.target.value) }></input>
+                    <input type={'password'} className='border my-5 mx-2' value={password} placeholder={"Password"} onChange={(e) => setPassword(e.target.value) }></input>
+                    <input type={'password'} className='border my-5 mx-2' value={confirmPassword} placeholder={"Confirm Password"} onChange={(e) => setConfirmPassword(e.target.value) }></input>
+
+
+                    
+                    <button className='border px-4 bg-black text-white ' type={'submit'}>submit</button>
+                </form>
+              )
+      }
+        
     </div>
   )
 }

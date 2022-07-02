@@ -9,6 +9,11 @@ import { USER_LOGIN_REQUEST,
     USER_REGISTER_SUCCESS,
     USER_REGISTER_FAIL,
 
+    USER_DETAILS_REQUEST,
+    USER_DETAILS_SUCCESS,
+    USER_DETAILS_FAIL,
+    USER_DETAILS_RESET,
+
 } from "../constants/userConstents";
 
 
@@ -19,7 +24,9 @@ export const login = (username, password) => async(dispatch) => {
         })
 
         const config = {
-            'Content-type' : 'applecation/json'
+            headers : {
+                'Content-type':'application/json',
+            }
         }
 
         const {data} = await axios.post(
@@ -44,19 +51,21 @@ export const login = (username, password) => async(dispatch) => {
 }
 
 
-export const register = (username, birth_year, password) => async(dispatch) => {
+export const register = (username, birth_year, student_id , school_name, phone_number, password) => async(dispatch) => {
     try {
         dispatch({
             type:USER_REGISTER_REQUEST
         })
 
         const config = {
-            'Conten-type':'application/json'
+            headers : {
+                'Content-type':'application/json',
+            }
         }
 
         const {data} = await axios.post(
             '/api/auth/create/',
-            {'username': username, 'birth_year':birth_year, 'password': password},
+            {'username': username, 'birth_year':birth_year, 'student_id': student_id, 'school_name':school_name, 'phone_number': phone_number, 'password': password},
             config
         )
 
@@ -76,7 +85,46 @@ export const register = (username, birth_year, password) => async(dispatch) => {
     }
 }
 
+export const getUserDetails = (id) => async(dispatch, getState) => {
+    try {
+        dispatch({
+            type:USER_DETAILS_REQUEST
+        })
+
+        const {
+            userLogin : {userInfo},
+        } = getState()
+        
+        const config = {
+            headers : {
+                'Content-type':'application/json',
+                Authorization : `Bearer ${userInfo.token}`
+            }
+        }
+
+        const {data} = await axios.get(
+            `/api/auth/${id}/`,
+            config
+        )
+
+        dispatch({
+            type : USER_DETAILS_SUCCESS,
+            payload : data
+        })
+
+    } catch(error) {
+        dispatch({
+            type : USER_DETAILS_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+        })
+    }
+}
+
+
 export const logout = () => (dispatch) => {
     localStorage.removeItem('userInfo')
     dispatch({ type: USER_LOGOUT })
+    dispatch({ type:USER_DETAILS_RESET })
 }

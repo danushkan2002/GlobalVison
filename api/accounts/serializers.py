@@ -1,31 +1,45 @@
+from dataclasses import fields
 from rest_framework import serializers
-from .models import UserAccount
+from .models import School, UserAccount
 from datetime import date
 from rest_framework_simplejwt.tokens import RefreshToken
 
 
 class UserSerializer(serializers.ModelSerializer):
-    age = serializers.SerializerMethodField(read_only=True)
+    age_category = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = UserAccount
-        fields = ['id', 'username', 'birth_year', 'age']
+        fields = ['id', 'username', 'birth_year', 'student_id', 'school_name' ,'phone_number', 'age_category', 'is_admin']
 
-    def get_age(self, obj):
+    def get_age_category(self, obj):
         today = date.today()
         age = today.year - obj.birth_year
-        return age
+        if age > 18 :
+            age_category = 20
+        else:
+            age_category = age
+        return age_category
+
+class SchoolSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = School
+        fields = '__all__'
 
 class UserSerializerWithToken(serializers.ModelSerializer):
-    age = serializers.SerializerMethodField(read_only=True)
+    age_category = serializers.SerializerMethodField(read_only=True)
     token = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = UserAccount
-        fields = ['id', 'username','birth_year', 'age', 'token']
+        fields = ['id', 'username','birth_year', 'student_id', 'school_name' ,'phone_number', 'age_category', 'token']
 
-    def get_age(self, obj):
+    def get_age_category(self, obj):
         today = date.today()
         age = today.year - obj.birth_year
-        return age
+        if age > 18 :
+            age_category = 20
+        else:
+            age_category = age
+        return age_category
         
     def get_token(self, obj):
         token = RefreshToken.for_user(obj)

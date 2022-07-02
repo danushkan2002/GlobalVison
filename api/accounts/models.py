@@ -30,19 +30,12 @@ class UserAccountManager(BaseUserManager):
         return user
 
 
-class District(models.Model):
-    district = models.CharField(max_length=100, unique=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.district
 
 
 
 class School(models.Model):
     school_name = models.CharField(max_length=255, unique=True)
-    district = models.ForeignKey(District, on_delete=models.DO_NOTHING)
+    district = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -62,7 +55,7 @@ class School(models.Model):
 class UserAccount(AbstractBaseUser):
     username = models.CharField(max_length=100, unique=True)
     student_id = models.CharField(max_length=50, unique=True, blank=True, null=True)
-    school_name = models.ForeignKey(School, on_delete=models.DO_NOTHING, blank=True, null=True)
+    school_name = models.CharField(max_length=250, blank=True, null=True)
     birth_year = models.IntegerField(blank=True, null=True)
     phone_number = models.CharField(max_length=10, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
