@@ -21,10 +21,10 @@ const RegisterScreen = () => {
   const history = useNavigate()
 
   const userRegister = useSelector(state => state.userRegister)
-    const {loading, error } = userRegister
+  const {loading, error } = userRegister
 
-    const getSchool = useSelector(state => state.getSchool)
-    const {schoolDetailsLoading, schoolDetailsError , schoolDetails} = getSchool
+  const schoolData = useSelector(state => state.schoolData)
+  const {schoolLoading, schoolError , school} = schoolData
 
   useEffect(() => {
     if (load)  {
@@ -53,10 +53,10 @@ const RegisterScreen = () => {
       {message && <Message>{message}</Message>}
       {error && <Message>{error}</Message>}
       {
-        schoolDetailsLoading ?
+        schoolLoading ?
           (<Loader/>) :
-          schoolDetailsError ? 
-            (<Message>{schoolDetailsError}</Message>) :
+          schoolError ? 
+            (<Message>{schoolError}</Message>) :
               (
                 <form onSubmit={submitHandler}>
                     <input type={'text'} className='border my-5 mx-2' value={username} placeholder={'Username'} onChange={(e) => setUsername(e.target.value) }></input>
@@ -65,7 +65,7 @@ const RegisterScreen = () => {
                     <select className='border my-5 mx-2' value={school_name} onChange={(e) => setSchool_name(e.target.value) }>
                             <option defaultValue={true}>select somethio</option>
                             { 
-                              schoolDetails.map((school) => (
+                              school.map((school) => (
                                 <option key={school.id} value={school.school_name}>{school.school_name}</option>))
                             }
                           </select>

@@ -32,7 +32,7 @@ const ProfileScreen = () => {
             : error ? <Message>{error}</Message>
               : <div>
                   <p className='text-4xl'>Hi....! {user.username}</p>
-                  <p className='mt-5'>you are {user.age} years old</p>
+                  <p className='mt-5'>you are {user.age_category} years old Category</p>
                 </div>
         }
     </div>

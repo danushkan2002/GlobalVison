@@ -1,4 +1,6 @@
 import axios from "axios";
+import { GET_SCHOOL_RESET } from "../constants/getConstents";
+import { GET_CATEGORY_SUBJECTS_RESET } from "../constants/subjectConstents";
 import { USER_LOGIN_REQUEST,
     USER_LOGIN_SUCCESS,
     USER_LOGIN_FAIL,
@@ -39,7 +41,6 @@ export const login = (username, password) => async(dispatch) => {
             payload:data
         })
         localStorage.setItem('userInfo', JSON.stringify(data))
-
     } catch(error) {
         dispatch({
             type : USER_LOGIN_FAIL,
@@ -85,7 +86,7 @@ export const register = (username, birth_year, student_id , school_name, phone_n
     }
 }
 
-export const getUserDetails = (id) => async(dispatch, getState) => {
+export const getUserDetails = () => async(dispatch, getState) => {
     try {
         dispatch({
             type:USER_DETAILS_REQUEST
@@ -103,7 +104,7 @@ export const getUserDetails = (id) => async(dispatch, getState) => {
         }
 
         const {data} = await axios.get(
-            `/api/auth/${id}/`,
+            `/api/auth/profile/`,
             config
         )
 
@@ -126,5 +127,7 @@ export const getUserDetails = (id) => async(dispatch, getState) => {
 export const logout = () => (dispatch) => {
     localStorage.removeItem('userInfo')
     dispatch({ type: USER_LOGOUT })
-    dispatch({ type:USER_DETAILS_RESET })
+    dispatch({ type: USER_DETAILS_RESET })
+    dispatch({ type: GET_CATEGORY_SUBJECTS_RESET })
+    dispatch({ type: GET_SCHOOL_RESET })
 }

@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { logout } from '../Actions/userAction'
 import { getUserDetails } from '../Actions/userAction'
 
@@ -12,15 +12,17 @@ const Navbar = () => {
     const userDetails = useSelector(state => state.userDetails)
     const { user } = userDetails
     
+    const history = useNavigate()
     const dispatch = useDispatch()
 
     const logoutHandler = () => {
         dispatch(logout())
+        history('/')
     }
 
     useEffect(() => {
         if (userInfo) {
-          dispatch(getUserDetails('profile'))
+          dispatch(getUserDetails())
         }
     },[dispatch, userInfo])  
   return (
@@ -45,6 +47,8 @@ const Navbar = () => {
                             <button className='px-2' onClick={logoutHandler}> Logout</button>
                             <span>|</span>
                             <Link className='px-2' to={'/Profile'}>Profile</Link>
+                            <span>|</span>
+                            <Link className='px-2' to={'/Learn'}>Learn</Link>
                         </div>
                     )
                 ) : (

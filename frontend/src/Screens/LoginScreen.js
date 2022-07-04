@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import {  useLocation, useNavigate } from 'react-router-dom'
+import {   useNavigate } from 'react-router-dom'
 import { login } from '../Actions/userAction'
 import Loader from '../Componets/Loader'
 import Message from '../Componets/Message'
@@ -8,7 +8,6 @@ import Message from '../Componets/Message'
 const LoginScreen = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const location = useLocation()
     const history = useNavigate()
     const dispatch = useDispatch()
 
