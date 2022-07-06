@@ -5,8 +5,9 @@ import HomeScreen from './Screens/HomeScreen';
 import LoginScreen from './Screens/LoginScreen';
 import ProfileScreen from './Screens/ProfileScreen';
 import RegisterScreen from './Screens/RegisterScreen';
-import SubjectCategoryScreen from './Screens/SubjectCategoryScreen';
 import SubjectsScreen from './Screens/SubjectsScreen';
+import SubjectCategoryScreen from './Screens/SubjectCategoryScreen';
+import SubjectScreen from './Screens/SubjectScreen';
 import AdminRoute from './Utils/AdminRoute';
 import PrivateRoute from './Utils/PrivateRoute';
 
@@ -17,15 +18,17 @@ function App() {
       <Routes>
         <Route  element={<PrivateRoute/>}>
           <Route path='/profile' element={<ProfileScreen/>} />
-          <Route path='/learn' element={<SubjectsScreen/>} />
-          <Route path='/learn/:cat' element={<SubjectCategoryScreen/>} />
+          <Route path='/learn' element={<SubjectCategoryScreen/>} />
+          <Route path='/learn/:cat' element={<SubjectsScreen/>} />
+          <Route path='/learn/:cat/:id' element={<SubjectScreen/>} />
         </Route>
         <Route element={<AdminRoute/>}>
           <Route path='/admin' element={<AdminScreen/>} />
+          <Route path='/register' element={<RegisterScreen/>}/>
         </Route>
         <Route path='/login' element={<LoginScreen/>}/>
         <Route path='/' element={<HomeScreen/>} />
-        <Route path='/register' element={<RegisterScreen/>}/>
+        
         
       </Routes>
     </Router>

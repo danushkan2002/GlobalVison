@@ -46,6 +46,7 @@ def getUserProfile(request):
     return Response(serializer.data)
 
 @api_view(['GET'])
+@permission_classes([IsAdminUser])
 def getSchool(request):
     school = School.objects.all()
     serializer = SchoolSerializer(school, many=True)

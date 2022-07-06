@@ -21,24 +21,22 @@ const Navbar = () => {
     }
 
     useEffect(() => {
-        if (userInfo) {
-          dispatch(getUserDetails())
-        }
+        dispatch(getUserDetails())
     },[dispatch, userInfo])  
   return (
     <div className='flex font-bold text-xl px-5 py-5 bg-slate-200'>
         <div className='flex justify-start'>
-            { userInfo ? (
+            { user ? (
                 
                     (user.is_admin) ? (
                         <div>
                             <button className='px-2' onClick={logoutHandler}> Logout</button>
                             <span>|</span>
-                            <Link className='px-2' to={'/Profile'}>Profile </Link>
+                            <Link className='px-2' to={'/profile'}>Profile </Link>
                             <span>|</span>
-                            <Link className='px-2' to={'/Profile'}>UsersList </Link>
+                            <Link className='px-2' to={'/profile'}>UsersList </Link>
                             <span>|</span>
-                            <Link className='px-2' to={'/Profile'}>Notifications </Link>
+                            <Link className='px-2' to={'/profile'}>Notifications </Link>
                             <span>|</span>
                             <Link className='px-2' to={'/register'}> Register</Link>
                         </div>
@@ -46,16 +44,14 @@ const Navbar = () => {
                         <div>
                             <button className='px-2' onClick={logoutHandler}> Logout</button>
                             <span>|</span>
-                            <Link className='px-2' to={'/Profile'}>Profile</Link>
+                            <Link className='px-2' to={'/profile'}>Profile</Link>
                             <span>|</span>
-                            <Link className='px-2' to={'/Learn'}>Learn</Link>
+                            <Link className='px-2' to={'/learn'}>Learn</Link>
                         </div>
                     )
                 ) : (
                 <div>
                 <Link className='px-2' to={'/login'}> login</Link>
-                <span>|</span>
-                <Link className='px-2' to={'/register'}> Register</Link>
                 </div>
                 
             )}

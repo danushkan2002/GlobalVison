@@ -46,6 +46,11 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'api.subjects',
     'api.about',
+    'api.articles',
+    'api.applications',
+    'api.results',
+    'api.courses',
+    'api.inbox',
 ]
 
 AUTH_USER_MODEL = 'accounts.UserAccount'

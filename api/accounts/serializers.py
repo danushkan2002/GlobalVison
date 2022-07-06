@@ -30,7 +30,7 @@ class UserSerializerWithToken(serializers.ModelSerializer):
     token = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = UserAccount
-        fields = ['id', 'username','birth_year', 'student_id', 'school_name' ,'phone_number', 'age_category', 'token']
+        fields = ['id', 'username','birth_year', 'student_id', 'school_name' ,'phone_number', 'age_category', 'token', 'is_admin',]
 
     def get_age_category(self, obj):
         today = date.today()

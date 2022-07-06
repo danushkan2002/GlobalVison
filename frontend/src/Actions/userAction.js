@@ -1,6 +1,9 @@
 import axios from "axios";
 import { GET_SCHOOL_RESET } from "../constants/getConstents";
-import { GET_CATEGORY_SUBJECTS_RESET } from "../constants/subjectConstents";
+import { 
+    GET_SUBJECTS_BY_CATEGORY_RESET,
+    GET_SUBJECT_BY_CATEGORY_RESET,
+} from "../constants/subjectConstents";
 import { USER_LOGIN_REQUEST,
     USER_LOGIN_SUCCESS,
     USER_LOGIN_FAIL,
@@ -128,6 +131,7 @@ export const logout = () => (dispatch) => {
     localStorage.removeItem('userInfo')
     dispatch({ type: USER_LOGOUT })
     dispatch({ type: USER_DETAILS_RESET })
-    dispatch({ type: GET_CATEGORY_SUBJECTS_RESET })
+    dispatch({ type: GET_SUBJECTS_BY_CATEGORY_RESET })
+    dispatch({ type: GET_SUBJECT_BY_CATEGORY_RESET })
     dispatch({ type: GET_SCHOOL_RESET })
 }

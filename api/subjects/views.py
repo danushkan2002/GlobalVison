@@ -18,28 +18,35 @@ def home(request):
 def homepost(request):
     data = request.data
     subject = Subject.objects.create(
-    subject_name = data['subject_name'],
-    part_number = data['part_number'],
-    grade_name = data['grade_name'],
+        subject_name = data['subject_name'],
+        part_number = data['part_number'],
+        grade_name = data['grade_name'],
     )
     serializer = SubjectSerializer(subject, many=False)
     return Response(serializer.data)
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def ageData(request,pk):
-    subject = Subject.objects.filter(grade__age=pk)
+def getSubjectsByAge(request,age):
+    subject = Subject.objects.filter(grade__age=age)
     serializer = SubjectSerializer(subject, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def ageWithSubjectData(request,pk,cat):
-    subject = Subject.objects.filter(grade__age=pk, category__category=cat)
+def getSubjectsByAgeAndCategory(request,age,cat):
+    subject = Subject.objects.filter(grade__age=age, category__category=cat)
     serializer = SubjectSerializer(subject, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
+def getSubjectByAgeAndCategory(request,age,cat,id):
+    subject = Subject.objects.get(grade__age=age, category__category=cat, id=id)
+    serializer = SubjectSerializer(subject, many=False)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def getSubjectCategory(request):
     subject = Category.objects.all()
     serializer = CategorySerializer(subject, many=True)

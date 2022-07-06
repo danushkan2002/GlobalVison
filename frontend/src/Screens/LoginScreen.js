@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {   useNavigate } from 'react-router-dom'
-import { login } from '../Actions/userAction'
+import { getUserDetails, login } from '../Actions/userAction'
 import Loader from '../Componets/Loader'
 import Message from '../Componets/Message'
 
@@ -18,8 +18,10 @@ const LoginScreen = () => {
     useEffect(()=> {
       if (userInfo) {
           history('/')
-      } 
-    }, [history, userInfo])
+      } else {
+        dispatch(getUserDetails())
+      }
+    }, [dispatch ,history, userInfo])
     
     const submitHandler = (e) => {
       e.preventDefault()

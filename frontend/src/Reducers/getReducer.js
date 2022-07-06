@@ -31,19 +31,19 @@ export const schoolDataReducer = (state = { school:[] }, action) => {
 }
 
 
-export const subjectCategoryDataReducer = (state = { subjectCategory:[] }, action) => {
+export const subjectCategoryReducer = (state = { subjectsCategories:[] }, action) => {
     switch(action.type) {
         case  GET_SUBJECT_CATEGORY_REQUEST:
-            return {...state, subjectCategoryLoading: true}
+            return {...state, subjectsCategoriesLoading: true}
 
         case  GET_SUBJECT_CATEGORY_SUCCESS:
-            return {subjectCategoryLoading: false, subjectCategory: action.payload}
+            return {subjectsCategoriesLoading: false, subjectsCategories: action.payload}
 
         case  GET_SUBJECT_CATEGORY_FAIL:
-            return {subjectCategoryLoading: false, subjectCategoryError: action.payload}
+            return {subjectsCategoriesLoading: false, subjectsCategoriesError: action.payload}
 
         case  GET_SUBJECT_CATEGORY_RESET:
-            return {subjectCategory:[]}
+            return {subjectsCategories:[]}
     
         default:
             return state

@@ -1,34 +1,30 @@
-import React ,{ useEffect} from 'react'
-import { useParams  } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux/es/exports';
-import { getCategorySubjectsDetails } from '../Actions/subjectAction';
+import React, {useEffect} from 'react'
+import { useDispatch, useSelector } from 'react-redux/es/exports'
+import { Link } from 'react-router-dom'
+import { getSubjectCategory } from '../Actions/getAction'
 import Loader from '../Componets/Loader'
 import Message from '../Componets/Message'
 
-const SubjectCategoryScreen = () => {
-    let {cat} = useParams();
-    
-    const categorySubjectDetails = useSelector(state => state.categorySubjectDetails)
-    const { categorySubjects , categorySubjectsLoading, categorySubjectsError } = categorySubjectDetails
-
+const SubjectsScreen = () => {
     const dispatch = useDispatch()
 
-    useEffect(()=>{
-        dispatch(getCategorySubjectsDetails(cat))
-    },[dispatch, cat])
-  
+    const subjectCategory = useSelector(state => state.subjectCategory)
+    const { subjectsCategories, subjectsCategoriesLoading, subjectsCategoriesError } = subjectCategory
+
+    useEffect(()=> {
+        dispatch(getSubjectCategory())
+      }, [dispatch])
   return (
     <div>
     {
-        categorySubjectsLoading ?
+        subjectsCategoriesLoading ?
         <Loader/> :
-        categorySubjectsError ?
-            <Message>{categorySubjectsError}</Message> :
+            subjectsCategoriesError ?
+            <Message>{subjectsCategoriesError}</Message> :
             (
-                categorySubjects.map((subject) => (
+                subjectsCategories.map((subject) => (
                     <div key={subject.id} className="m-10 border">
-                        <p className='text-xl'>{subject.subject_name}</p>
-                        {subject.grade.age}
+                        <Link to={`/learn/${subject.category}`} className='text-xl'>{subject.category}</Link>
                     </div>
                 ))
             )
@@ -37,4 +33,20 @@ const SubjectCategoryScreen = () => {
   )
 }
 
-export default SubjectCategoryScreen
+export default SubjectsScreen
+
+
+// {
+//     subjectsLoading ?
+//     <Loader/> :
+//         subjectsError ?
+//         <Message>{subjectsError}</Message> :
+//         (
+//             subjects.map((subject) => (
+//                 <div key={subject.id} className="m-10 border">
+//                     <Link to={`/learn/${subject.category.category}`} className='text-xl'>{subject.subject_name}</Link>
+//                     {subject.grade.age}
+//                 </div>
+//             ))
+//         )
+// }
