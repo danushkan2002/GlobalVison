@@ -14,10 +14,9 @@ def postApplication(request):
         student_name = data['student_name'],
         email = data['email'],
         phone_number = data['phone_number'],
-        birth_date = data['birth_date'],
+        birth_year = data['birth_year'],
         distric = data['distric'],
         postal_code = data['postal_code'],
-        created_at = data['created_at']
     )
     serializer = ApplicationSerializer(application, many=False)
     return Response(serializer.data)
@@ -31,6 +30,6 @@ def getApplications(request):
 
 @api_view(['GET'])
 def getApplication(request, pk):
-    application = Application.objects.filter(id=pk)
-    serializer = ApplicationSerializer(application, many=True)
+    application = Application.objects.get(id=pk)
+    serializer = ApplicationSerializer(application, many=False)
     return Response(serializer.data)

@@ -10,6 +10,10 @@ import SubjectCategoryScreen from './Screens/SubjectCategoryScreen';
 import SubjectScreen from './Screens/SubjectScreen';
 import AdminRoute from './Utils/AdminRoute';
 import PrivateRoute from './Utils/PrivateRoute';
+import UnPrivateRoute from './Utils/UnPrivateRoute';
+import ApplicationScreen from './Screens/ApplicationScreen';
+import ApplicationFormScreen from './Screens/ApplicationFormScreen';
+import ApplicationsScreen from './Screens/ApplicationsScreen';
 
 function App() {
   return (
@@ -25,7 +29,15 @@ function App() {
         <Route element={<AdminRoute/>}>
           <Route path='/admin' element={<AdminScreen/>} />
           <Route path='/register' element={<RegisterScreen/>}/>
+          <Route path='/applications' element={<ApplicationsScreen/>}/>
+          <Route path='/applications/:id' element={<ApplicationScreen/>}/>
         </Route>
+
+        <Route element={<UnPrivateRoute/>}>
+          <Route path='/application' element={<ApplicationFormScreen/>}/>
+          
+        </Route>
+
         <Route path='/login' element={<LoginScreen/>}/>
         <Route path='/' element={<HomeScreen/>} />
         

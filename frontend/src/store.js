@@ -4,6 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { userLoginReducer, userRegisterReducer, userDetailsReducer} from './Reducers/userReducer'
 import { schoolDataReducer, subjectCategoryReducer, } from './Reducers/getReducer'
 import { subjectsByCategoryReducer, subjectByCategoryReducer } from './Reducers/subjectReducer'
+import { applicationCreateReducer, applicationDataReducer, applicationsDataReducer } from './Reducers/applicationReducer'
 
 const reducer = combineReducers({
     userLogin : userLoginReducer,
@@ -14,6 +15,11 @@ const reducer = combineReducers({
     subjectCategory: subjectCategoryReducer,
     subjectByCategory : subjectByCategoryReducer,
     subjectsByCategory : subjectsByCategoryReducer,
+
+    applicationCreate : applicationCreateReducer,
+    applicationsData : applicationsDataReducer,
+    applicationData : applicationDataReducer,
+
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo') ?

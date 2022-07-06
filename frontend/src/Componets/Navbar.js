@@ -3,15 +3,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { logout } from '../Actions/userAction'
 import { getUserDetails } from '../Actions/userAction'
+import Loader from './Loader'
+import Message from './Message'
 
 
 const Navbar = () => {
     const userLogin = useSelector(state => state.userLogin)
-    const {userInfo} = userLogin 
-    
-    const userDetails = useSelector(state => state.userDetails)
-    const { user } = userDetails
-    
+    const {userInfo, error, loading } = userLogin 
+        
     const history = useNavigate()
     const dispatch = useDispatch()
 
@@ -26,9 +25,14 @@ const Navbar = () => {
   return (
     <div className='flex font-bold text-xl px-5 py-5 bg-slate-200'>
         <div className='flex justify-start'>
-            { user ? (
+            { 
+                loading ?
+                <Loader/>:
+                    error ?
+                    <Message>{error}</Message> :
                 
-                    (user.is_admin) ? (
+                userInfo ? (
+                    (userInfo.is_admin) ? (
                         <div>
                             <button className='px-2' onClick={logoutHandler}> Logout</button>
                             <span>|</span>
@@ -39,6 +43,8 @@ const Navbar = () => {
                             <Link className='px-2' to={'/profile'}>Notifications </Link>
                             <span>|</span>
                             <Link className='px-2' to={'/register'}> Register</Link>
+                            <span>|</span>
+                            <Link className='px-2' to={'/applications/'}> applications</Link>
                         </div>
                     ) : (
                         <div>
@@ -52,6 +58,8 @@ const Navbar = () => {
                 ) : (
                 <div>
                 <Link className='px-2' to={'/login'}> login</Link>
+                <span>|</span>
+                <Link className='px-2' to={'/application'}>Applicationy</Link>
                 </div>
                 
             )}

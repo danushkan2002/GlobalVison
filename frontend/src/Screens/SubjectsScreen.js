@@ -22,7 +22,7 @@ const SubjectByCategoryScreen = () => {
     {
         subjectsLoading ?
         <Loader/> :
-        subjectsError ?
+            subjectsError ?
             <Message>{subjectsError}</Message> :
             (
                 subjects.map((subject) => (
