@@ -5,7 +5,6 @@ import {  useNavigate } from 'react-router-dom'
 import Loader from '../Componets/Loader'
 import Message from '../Componets/Message'
 
-
 const ApplicationFormScreen = () => {
     const [student_name, setStudent_name] = useState('')
     const [email, setEmail] = useState('')

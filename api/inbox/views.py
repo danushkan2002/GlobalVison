@@ -10,16 +10,13 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 @api_view(['POST'])
 def postInbox(request):
     data = request.data
-    application = Inbox.objects.create(
-        student_name = data['student_name'],
+    message = Inbox.objects.create(
+        username = data['username'],
         email = data['email'],
-        phone_number = data['phone_number'],
-        birth_date = data['birth_date'],
-        distric = data['distric'],
-        postal_code = data['postal_code'],
-        created_at = data['created_at']
+        subject = data['subject'],
+        content = data['content'],
     )
-    serializer = InboxSerializer(application, many=False)
+    serializer = InboxSerializer(message, many=False)
     return Response(serializer.data)
 
    
@@ -31,6 +28,6 @@ def getInbox(request):
 
 @api_view(['GET'])
 def getMessage(request, pk):
-    application = Inbox.objects.filter(id=pk)
-    serializer = InboxSerializer(application, many=True)
+    application = Inbox.objects.get(id=pk)
+    serializer = InboxSerializer(application, many=False)
     return Response(serializer.data)

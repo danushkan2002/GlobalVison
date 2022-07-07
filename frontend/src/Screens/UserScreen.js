@@ -26,8 +26,7 @@ const UserScreen = () => {
       userLoading ?
       <Loader/> :
       userError ?
-          <Message>{userError}</Message> :
-
+          <Message>{userError}</Message> :    
           (
             user.username
           )

@@ -16,6 +16,9 @@ import ApplicationFormScreen from './Screens/ApplicationFormScreen';
 import ApplicationsScreen from './Screens/ApplicationsScreen';
 import UsersScreen from './Screens/UsersScreen';
 import UserScreen from './Screens/UserScreen';
+import MessagesScreen from './Screens/MessagesScreen';
+import MessageFormScreen from './Screens/MessageFormScreen';
+import MessageScreen from './Screens/MessageScreen';
 
 function App() {
   return (
@@ -27,6 +30,7 @@ function App() {
           <Route path='/learn/' element={<SubjectCategoryScreen/>} />
           <Route path='/learn/:cat/' element={<SubjectsScreen/>} />
           <Route path='/learn/:cat/:id/' element={<SubjectScreen/>} />
+          <Route path='/review/' element={<MessageFormScreen/>}/>
         </Route>
         <Route element={<AdminRoute/>}>
           <Route path='/admin/' element={<AdminScreen/>} />
@@ -35,6 +39,8 @@ function App() {
           <Route path='/applications/:id/' element={<ApplicationScreen/>}/>
           <Route path='/users/' element={<UsersScreen/>}/>
           <Route path='/users/:id/' element={<UserScreen/>}/>
+          <Route path='/inbox/' element={<MessagesScreen/>}/>
+          <Route path='/inbox/:id' element={<MessageScreen/>}/>
         </Route>
 
         <Route element={<UnPrivateRoute/>}>

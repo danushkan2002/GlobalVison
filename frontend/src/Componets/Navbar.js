@@ -36,23 +36,27 @@ const Navbar = () => {
                         <div>
                             <button className='px-2' onClick={logoutHandler}> Logout</button>
                             <span>|</span>
-                            <Link className='px-2' to={'/profile'}>Profile </Link>
+                            <Link className='px-2' to={'/profile/'}>Profile </Link>
                             <span>|</span>
                             <Link className='px-2' to={'/users/'}>UsersList </Link>
                             <span>|</span>
-                            <Link className='px-2' to={'/profile'}>Notifications </Link>
+                            <Link className='px-2' to={'/profile/'}>Notifications </Link>
                             <span>|</span>
-                            <Link className='px-2' to={'/register'}> Register</Link>
+                            <Link className='px-2' to={'/register/'}> Register</Link>
                             <span>|</span>
                             <Link className='px-2' to={'/applications/'}> applications</Link>
+                            <span>|</span>
+                            <Link className='px-2' to={'/inbox/'}> Inbox</Link>
                         </div>
                     ) : (
                         <div>
                             <button className='px-2' onClick={logoutHandler}> Logout</button>
                             <span>|</span>
-                            <Link className='px-2' to={'/profile'}>Profile</Link>
+                            <Link className='px-2' to={'/profile/'}>Profile</Link>
                             <span>|</span>
-                            <Link className='px-2' to={'/learn'}>Learn</Link>
+                            <Link className='px-2' to={'/learn/'}>Learn</Link>
+                            <span>|</span>
+                            <Link className='px-2' to={'/review/'}>review</Link>
                         </div>
                     )
                 ) : (

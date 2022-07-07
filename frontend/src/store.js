@@ -5,6 +5,7 @@ import { userLoginReducer, userRegisterReducer, userDataReducer, usersDataReduce
 import { schoolDataReducer, subjectCategoryReducer, } from './Reducers/getReducer'
 import { subjectsByCategoryReducer, subjectByCategoryReducer } from './Reducers/subjectReducer'
 import { applicationCreateReducer, applicationDataReducer, applicationsDataReducer } from './Reducers/applicationReducer'
+import { messageCreateDataReducer, messageDataReducer, messagesDataReducer } from './Reducers/inboxReducer'
 
 const reducer = combineReducers({
     userLogin : userLoginReducer,
@@ -22,6 +23,10 @@ const reducer = combineReducers({
     applicationCreate : applicationCreateReducer,
     applicationsData : applicationsDataReducer,
     applicationData : applicationDataReducer,
+
+    messageCreateData : messageCreateDataReducer,
+    messagesData: messagesDataReducer,
+    messageData: messageDataReducer,
 
 })
 
