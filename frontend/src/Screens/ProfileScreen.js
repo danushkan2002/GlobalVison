@@ -6,8 +6,8 @@ import Loader from '../Componets/Loader'
 import Message  from '../Componets/Message'
 
 const ProfileScreen = () => {
-    const userDetails = useSelector(state => state.userDetails)
-    const { error, loading, user } = userDetails
+    const userProfileData = useSelector(state => state.userProfileData)
+    const { userProfileError, userProfileLoading, userProfile } = userProfileData
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
@@ -28,11 +28,11 @@ const ProfileScreen = () => {
   return (
     <div className='mx-7 my-10'>
         {
-          loading ? <Loader/> 
-            : error ? <Message>{error}</Message>
+          userProfileLoading ? <Loader/> 
+            : userProfileError ? <Message>{userProfileError}</Message>
               : <div>
-                  <p className='text-4xl'>Hi....! {user.username}</p>
-                  <p className='mt-5'>you are {user.age_category} years old Category</p>
+                  <p className='text-4xl'>Hi....! {userProfile.username}</p>
+                  <p className='mt-5'>you are {userProfile.age_category} years old Category</p>
                 </div>
         }
     </div>

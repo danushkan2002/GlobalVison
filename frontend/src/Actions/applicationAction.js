@@ -37,7 +37,6 @@ export const createApplication = (student_name, email, phone_number, birth_year,
             payload : data
         })
 
-        localStorage.setItem('userInfo', JSON.stringify(data))
     } catch(error) {
         dispatch({
             type : POST_CREATE_APPLICATION_FAIL,
@@ -48,15 +47,20 @@ export const createApplication = (student_name, email, phone_number, birth_year,
     }
 }
 
-export const getApplications = () => async(dispatch) => {
+export const getApplications = () => async(dispatch, getState) => {
     try {
         dispatch({
             type:GET_APPLICATIONS_REQUEST
         })
         
+        const {
+            userLogin : {userInfo},
+        } = getState()
+
         const config = {
             headers : {
                 'Content-type':'application/json',
+                Authorization : `Bearer ${userInfo.token}`
             }
         }
 
@@ -81,15 +85,20 @@ export const getApplications = () => async(dispatch) => {
 }
 
 
-export const getApplication = (id) => async(dispatch) => {
+export const getApplication = (id) => async(dispatch, getState) => {
     try {
         dispatch({
             type:GET_APPLICATION_REQUEST
         })
+
+        const {
+            userLogin : {userInfo},
+        } = getState()
         
         const config = {
             headers : {
                 'Content-type':'application/json',
+                Authorization : `Bearer ${userInfo.token}`
             }
         }
 

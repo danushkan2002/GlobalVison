@@ -5,8 +5,8 @@ from django.db import models
 
 class Application(models.Model):
     student_name = models.CharField(max_length=100)
-    email = models.EmailField()
-    phone_number = models.CharField(max_length=15)
+    email = models.EmailField(unique=True)
+    phone_number = models.CharField(max_length=15, unique=True)
     birth_year = models.IntegerField()
     distric = models.CharField(max_length=50)
     postal_code = models.CharField(max_length=10)

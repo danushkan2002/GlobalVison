@@ -27,18 +27,18 @@ const Navbar = () => {
         <div className='flex justify-start'>
             { 
                 loading ?
-                <Loader/>:
+                <Loader/> :
                     error ?
                     <Message>{error}</Message> :
                 
                 userInfo ? (
-                    (userInfo.is_admin) ? (
+                    (userInfo.is_admin && userInfo.is_superadmin) ? (
                         <div>
                             <button className='px-2' onClick={logoutHandler}> Logout</button>
                             <span>|</span>
                             <Link className='px-2' to={'/profile'}>Profile </Link>
                             <span>|</span>
-                            <Link className='px-2' to={'/profile'}>UsersList </Link>
+                            <Link className='px-2' to={'/users/'}>UsersList </Link>
                             <span>|</span>
                             <Link className='px-2' to={'/profile'}>Notifications </Link>
                             <span>|</span>
@@ -59,7 +59,7 @@ const Navbar = () => {
                 <div>
                 <Link className='px-2' to={'/login'}> login</Link>
                 <span>|</span>
-                <Link className='px-2' to={'/application'}>Applicationy</Link>
+                <Link className='px-2' to={'/application'}>Application</Link>
                 </div>
                 
             )}

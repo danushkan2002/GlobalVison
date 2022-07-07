@@ -12,13 +12,17 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['id', 'username', 'birth_year', 'student_id', 'school_name' ,'phone_number', 'age_category', 'is_admin']
 
     def get_age_category(self, obj):
-        today = date.today()
-        age = today.year - obj.birth_year
-        if age > 18 :
-            age_category = 20
+        if obj.birth_year :
+            today = date.today()
+            age = today.year - obj.birth_year
+            if age > 18 :
+                age_category = 20
+            else:
+                age_category = age
+            return age_category
         else:
-            age_category = age
-        return age_category
+            pass
+        
 
 class SchoolSerializer(serializers.ModelSerializer):
     class Meta:
@@ -30,17 +34,20 @@ class UserSerializerWithToken(serializers.ModelSerializer):
     token = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = UserAccount
-        fields = ['id', 'username','birth_year', 'student_id', 'school_name' ,'phone_number', 'age_category', 'token', 'is_admin',]
+        fields = ['id', 'username','birth_year', 'student_id', 'school_name' ,'phone_number', 'age_category', 'token', 'is_admin', 'is_superadmin']
 
     def get_age_category(self, obj):
-        today = date.today()
-        age = today.year - obj.birth_year
-        if age > 18 :
-            age_category = 20
+        if obj.birth_year :
+            today = date.today()
+            age = today.year - obj.birth_year
+            if age > 18 :
+                age_category = 20
+            else:
+                age_category = age
+            return age_category
         else:
-            age_category = age
-        return age_category
-        
+            pass
+
     def get_token(self, obj):
         token = RefreshToken.for_user(obj)
         return str(token.access_token)

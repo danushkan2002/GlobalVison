@@ -1,7 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { userLoginReducer, userRegisterReducer, userDetailsReducer} from './Reducers/userReducer'
+import { userLoginReducer, userRegisterReducer, userDataReducer, usersDataReducer, userProfileDataReducer} from './Reducers/userReducer'
 import { schoolDataReducer, subjectCategoryReducer, } from './Reducers/getReducer'
 import { subjectsByCategoryReducer, subjectByCategoryReducer } from './Reducers/subjectReducer'
 import { applicationCreateReducer, applicationDataReducer, applicationsDataReducer } from './Reducers/applicationReducer'
@@ -9,7 +9,10 @@ import { applicationCreateReducer, applicationDataReducer, applicationsDataReduc
 const reducer = combineReducers({
     userLogin : userLoginReducer,
     userRegister : userRegisterReducer,
-    userDetails : userDetailsReducer,
+    userProfileData : userProfileDataReducer,
+    usersData : usersDataReducer,
+    userData : userDataReducer,
+    
     schoolData : schoolDataReducer,
 
     subjectCategory: subjectCategoryReducer,

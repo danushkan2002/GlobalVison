@@ -31,15 +31,22 @@ class MyTokenObtainPairView(TokenObtainPairView):
 
 
 @api_view(['GET'])
-@permission_classes([IsAdminUser])
+@permission_classes([IsAuthenticated])
 def getUsers(request):
     users = UserAccount.objects.all()
     serializer = UserSerializer(users, many=True)
     return Response(serializer.data)
 
+@api_view(['GET'])
+@permission_classes([IsAdminUser])
+def getUser(request, pk):
+    user = UserAccount.objects.get(id=pk)
+    serializer = UserSerializer(user, many=False)
+    return Response(serializer.data)
+
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAdminUser])
 def getUserProfile(request):
     user = request.user
     serializer = UserSerializer(user, many=False)

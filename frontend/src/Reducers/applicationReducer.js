@@ -20,13 +20,13 @@ import {
 export const applicationCreateReducer = (state = {}, action) => {
     switch(action.type) {
         case POST_CREATE_APPLICATION_REQUEST:
-            return {applicationLoading: true}
+            return {applicationLoading: true, applicationSuccess:false}
 
         case POST_CREATE_APPLICATION_SUCCESS:
-            return {applicationLoading: false, application: action.payload}
+            return {applicationLoading: false, application: action.payload, applicationSuccess:true}
 
         case POST_CREATE_APPLICATION_FAIL:
-            return {applicationLoading: false, applicationError: action.payload}
+            return {applicationLoading: false, applicationError: action.payload, applicationSuccess:false}
 
         case POST_CREATE_APPLICATION_RESET:
             return {}

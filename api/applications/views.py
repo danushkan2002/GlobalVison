@@ -23,12 +23,14 @@ def postApplication(request):
 
    
 @api_view(['GET'])
+@permission_classes([IsAdminUser])
 def getApplications(request):
     application = Application.objects.all()
     serializer = ApplicationSerializer(application, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
+@permission_classes([IsAdminUser])
 def getApplication(request, pk):
     application = Application.objects.get(id=pk)
     serializer = ApplicationSerializer(application, many=False)

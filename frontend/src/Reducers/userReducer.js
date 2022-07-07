@@ -1,7 +1,6 @@
 import { USER_LOGIN_REQUEST,
          USER_LOGIN_SUCCESS,
          USER_LOGIN_FAIL,
-         
          USER_LOGOUT,
 
          USER_REGISTER_REQUEST,
@@ -11,7 +10,20 @@ import { USER_LOGIN_REQUEST,
          USER_DETAILS_REQUEST,
          USER_DETAILS_SUCCESS,
          USER_DETAILS_FAIL,
-         USER_DETAILS_RESET,      
+         USER_DETAILS_RESET,
+
+         GET_USERS_REQUEST,
+         GET_USERS_SUCCESS,
+         GET_USERS_FAIL,
+         GET_USERS_RESET, 
+         
+         GET_USER_REQUEST,
+         GET_USER_SUCCESS,
+         GET_USER_FAIL,
+         GET_USER_RESET,
+
+         
+         
 
 } from "../constants/userConstents";
 
@@ -54,16 +66,16 @@ export const userRegisterReducer = (state = {}, action ) => {
     }
 }
 
-export const userDetailsReducer = (state = { user: {} }, action) => {
+export const userProfileDataReducer = (state = { userProfile: {} }, action) => {
     switch(action.type) {
         case USER_DETAILS_REQUEST:
             return {...state, loading: true}
 
         case USER_DETAILS_SUCCESS:
-            return {loading: false, user: action.payload}
+            return {userProfileLoading: false, userProfile: action.payload}
 
         case USER_DETAILS_FAIL:
-            return {loading: false, error: action.payload}
+            return {userProfileLoading: false, userProfileError: action.payload}
 
         case USER_DETAILS_RESET:
             return {}
@@ -73,3 +85,40 @@ export const userDetailsReducer = (state = { user: {} }, action) => {
     }
 }
 
+export const usersDataReducer = (state = { users: [] }, action) => {
+    switch(action.type) {
+        case GET_USERS_REQUEST:
+            return {usersLoading: true}
+
+        case GET_USERS_SUCCESS:
+            return {usersLoading: false, users: action.payload}
+
+        case GET_USERS_FAIL:
+            return {usersLoading: false, usersError: action.payload}
+
+        case GET_USERS_RESET:
+            return {users:[]}
+
+        default:
+            return state
+    }
+}
+
+export const userDataReducer = (state = { user: {} }, action) => {
+    switch(action.type) {
+        case GET_USER_REQUEST:
+            return {userLoading: true}
+
+        case GET_USER_SUCCESS:
+            return {userLoading: false, user: action.payload}
+
+        case GET_USER_FAIL:
+            return {userLoading: false, userError: action.payload}
+
+        case GET_USER_RESET:
+            return {}
+
+        default:
+            return state
+    }
+}

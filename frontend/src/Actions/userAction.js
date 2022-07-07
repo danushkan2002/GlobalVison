@@ -19,6 +19,15 @@ import { USER_LOGIN_REQUEST,
     USER_DETAILS_FAIL,
     USER_DETAILS_RESET,
 
+    GET_USERS_REQUEST,
+    GET_USERS_SUCCESS,
+    GET_USERS_FAIL,
+         
+    GET_USER_REQUEST,
+    GET_USER_SUCCESS,
+    GET_USER_FAIL,
+
+
 } from "../constants/userConstents";
 
 
@@ -125,6 +134,82 @@ export const getUserDetails = () => async(dispatch, getState) => {
         })
     }
 }
+
+export const getUsers = () => async(dispatch, getState) => {
+    try {
+        dispatch({
+            type:GET_USERS_REQUEST
+        })
+
+        const {
+            userLogin : {userInfo},
+        } = getState()
+        
+        const config = {
+            headers : {
+                'Content-type':'application/json',
+                Authorization : `Bearer ${userInfo.token}`
+            }
+        }
+
+        const {data} = await axios.get(
+            `/api/auth/users/`,
+            config
+        )
+
+        dispatch({
+            type : GET_USERS_SUCCESS,
+            payload : data
+        })
+
+    } catch(error) {
+        dispatch({
+            type : GET_USERS_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+        })
+    }
+}
+
+export const getUser = (id) => async(dispatch, getState) => {
+    try {
+        dispatch({
+            type:GET_USER_REQUEST
+        })
+
+        const {
+            userLogin : {userInfo},
+        } = getState()
+        
+        const config = {
+            headers : {
+                'Content-type':'application/json',
+                Authorization : `Bearer ${userInfo.token}`
+            }
+        }
+
+        const {data} = await axios.get(
+            `/api/auth/users/${id}`,
+            config
+        )
+
+        dispatch({
+            type : GET_USER_SUCCESS,
+            payload : data
+        })
+
+    } catch(error) {
+        dispatch({
+            type : GET_USER_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+        })
+    }
+}
+
+
 
 
 export const logout = () => (dispatch) => {

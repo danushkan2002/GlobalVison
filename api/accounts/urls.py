@@ -10,5 +10,7 @@ urlpatterns = [
     path('update/', views.updateUserProfile, name='update-user'),
 
     path('get/school/', views.getSchool, name='get-school'),
+
+    path('users/<str:pk>/', views.getUser, name='get-user'),
     # path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
