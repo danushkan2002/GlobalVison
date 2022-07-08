@@ -14,12 +14,9 @@ def postArticles(request):
     article = Article.objects.create(
         creator_name = data['creator_name'],
         category = data['category'],
-        image = data['image']
-
     )
-    serializer = Article(article, many=False)
+    serializer = ArticleSerializer(article, many=False)
     return Response(serializer.data)
-
 
 @api_view(['GET'])
 def getArticlesCategory(request):
@@ -42,6 +39,6 @@ def getArticlesByCategory(request, cat):
 
 @api_view(['GET'])
 def getArticle(request, cat, id):
-    article = Article.objects.filter(category=cat, id=id)
-    serializer = ArticleSerializer(article, many=True)
+    article = Article.objects.get(category=cat, id=id)
+    serializer = ArticleSerializer(article, many=False) 
     return Response(serializer.data)

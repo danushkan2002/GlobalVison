@@ -2,12 +2,14 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { userLoginReducer, userRegisterReducer, userDataReducer, usersDataReducer, userProfileDataReducer} from './Reducers/userReducer'
-import { schoolDataReducer, subjectCategoryReducer, } from './Reducers/getReducer'
+import { articleCategoryReducer, schoolDataReducer, subjectCategoryReducer, } from './Reducers/getReducer'
 import { subjectsByCategoryReducer, subjectByCategoryReducer } from './Reducers/subjectReducer'
 import { applicationCreateReducer, applicationDataReducer, applicationsDataReducer } from './Reducers/applicationReducer'
 import { messageCreateDataReducer, messageDataReducer, messagesDataReducer } from './Reducers/inboxReducer'
 import { resultCreateDataReducer, resultDataReducer, resultsDataReducer } from './Reducers/ResultReducer'
 import { courseCreateDataReducer, courseDataReducer, coursesDataReducer } from './Reducers/courseReducer'
+import { projectCreateDataReducer, projectDataReducer, projectsDataReducer } from './Reducers/aboutReducer'
+import { articleCreateDataReducer, articleDataReducer, articlesDataReducer } from './Reducers/articleReducer'
 
 const reducer = combineReducers({
     userLogin : userLoginReducer,
@@ -37,6 +39,16 @@ const reducer = combineReducers({
     courseCreateData : courseCreateDataReducer,
     coursesData: coursesDataReducer,
     courseData : courseDataReducer,
+
+    projectCreateData : projectCreateDataReducer,
+    projectsData: projectsDataReducer,
+    projectData : projectDataReducer,
+
+    articleCategory: articleCategoryReducer,
+    articleCreateData: articleCreateDataReducer,
+    articlesByCategory : articlesDataReducer,
+    articleByCategory : articleDataReducer,
+
 
 })
 

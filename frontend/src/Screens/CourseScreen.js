@@ -12,7 +12,7 @@ const CourseScreen = () => {
 
   const courseData = useSelector(state => state.courseData)
   const {courseLoading, courseError,course } = courseData
-
+  
   useEffect(() => {
     dispatch(getCourse(id))
   },[dispatch, id])

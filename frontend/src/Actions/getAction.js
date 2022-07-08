@@ -8,6 +8,10 @@ import { GET_SCHOOL_REQUEST,
     GET_SUBJECT_CATEGORY_SUCCESS,
     GET_SUBJECT_CATEGORY_FAIL,
 
+    GET_ARTICLE_CATEGORY_REQUEST,
+    GET_ARTICLE_CATEGORY_SUCCESS,
+    GET_ARTICLE_CATEGORY_FAIL,
+
     
 } from "../constants/getConstents"
 
@@ -77,6 +81,38 @@ export const getSubjectCategory = () => async(dispatch, getState) => {
     } catch(error) {
         dispatch({
             type : GET_SUBJECT_CATEGORY_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+        })
+    }
+}
+
+export const getArticleCategory = () => async(dispatch) => {
+    try {
+        dispatch({
+            type:GET_ARTICLE_CATEGORY_REQUEST
+        })
+        
+        const config = {
+            headers : {
+                'Content-type':'application/json',
+            }
+        }
+
+        const {data} = await axios.get(
+            `/api/articles/get/category/`,
+            config
+        )
+
+        dispatch({
+            type : GET_ARTICLE_CATEGORY_SUCCESS,
+            payload : data
+        })
+
+    } catch(error) {
+        dispatch({
+            type : GET_ARTICLE_CATEGORY_FAIL,
             payload: error.response && error.response.data.detail
                 ? error.response.data.detail
                 : error.message,

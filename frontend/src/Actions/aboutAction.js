@@ -1,23 +1,26 @@
 import {
-    POST_RESULT_REQUEST,
-    POST_RESULT_SUCCESS,
-    POST_RESULT_FAIL,
+    POST_PROJECT_REQUEST,
+    POST_PROJECT_SUCCESS,
+    POST_PROJECT_FAIL,
 
-    GET_RESULTS_REQUEST,
-    GET_RESULTS_SUCCESS,
-    GET_RESULTS_FAIL,
+    GET_PROJECTS_REQUEST,
+    GET_PROJECTS_SUCCESS,
+    GET_PROJECTS_FAIL,
+    GET_PROJECTS_RESET,
 
-    GET_RESULT_REQUEST,
-    GET_RESULT_SUCCESS,
-    GET_RESULT_FAIL,
-} from '../constants/ResultConstents'
+    GET_PROJECT_REQUEST,
+    GET_PROJECT_SUCCESS,
+    GET_PROJECT_FAIL,
+    GET_PROJECT_RESET,
+    
+} from '../constants/aboutConstents'
 import axios from "axios";
 
 
-export const createResult = (student_id, course_id, vocabulary, grammar, speaking_and_listening, writing, reading) => async(dispatch, getState) => {
+export const createProject = (content, place_name) => async(dispatch, getState) => {
     try{
         dispatch({
-            type : POST_RESULT_REQUEST
+            type : POST_PROJECT_REQUEST
         })
 
         const {
@@ -31,19 +34,19 @@ export const createResult = (student_id, course_id, vocabulary, grammar, speakin
             }
         }
         const {data} = await axios.post(
-            '/api/results/create/',
-            {'student_id': student_id, 'course_id':course_id, 'vocabulary': vocabulary, 'grammar':grammar, 'speaking_and_listening': speaking_and_listening, 'writing': writing, 'reading': reading},
+            '/api/projects/create/',
+            {'content': content, 'place_name':place_name},
             config
         )
 
         dispatch({
-            type : POST_RESULT_SUCCESS,
+            type : POST_PROJECT_SUCCESS,
             payload : data
         })
 
     } catch(error) {
         dispatch({
-            type : POST_RESULT_FAIL,
+            type : POST_PROJECT_FAIL,
             payload: error.response && error.response.data.detail
                 ? error.response.data.detail
                 : error.message,
@@ -51,36 +54,31 @@ export const createResult = (student_id, course_id, vocabulary, grammar, speakin
     }
 }
 
-export const getResults = () => async(dispatch, getState) => {
+export const getProjects = () => async(dispatch) => {
     try {
         dispatch({
-            type:GET_RESULTS_REQUEST
+            type:GET_PROJECTS_REQUEST
         })
         
-        const {
-            userLogin : {userInfo},
-        } = getState()
-
         const config = {
             headers : {
                 'Content-type':'application/json',
-                Authorization : `Bearer ${userInfo.token}`
             }
         }
 
         const {data} = await axios.get(
-            `/api/results/`,
+            `/api/projects/`,
             config
         )
 
         dispatch({
-            type : GET_RESULTS_SUCCESS,
+            type : GET_PROJECTS_SUCCESS,
             payload : data
         })
 
     } catch(error) {
         dispatch({
-            type : GET_RESULTS_FAIL,
+            type : GET_PROJECTS_FAIL,
             payload: error.response && error.response.data.detail
                 ? error.response.data.detail
                 : error.message,
@@ -89,12 +87,12 @@ export const getResults = () => async(dispatch, getState) => {
 }
 
 
-export const getResult = (id) => async(dispatch) => {
+export const getProject = (id) => async(dispatch) => {
     try {
         dispatch({
-            type:GET_RESULT_REQUEST
+            type:GET_PROJECT_REQUEST
         })
-
+        
         const config = {
             headers : {
                 'Content-type':'application/json',
@@ -102,18 +100,18 @@ export const getResult = (id) => async(dispatch) => {
         }
 
         const {data} = await axios.get(
-            `/api/results/${id}/`,
+            `/api/projects/${id}/`,
             config
         )
 
         dispatch({
-            type : GET_RESULT_SUCCESS,
+            type : GET_PROJECT_SUCCESS,
             payload : data
         })
 
     } catch(error) {
         dispatch({
-            type : GET_RESULT_FAIL,
+            type : GET_PROJECT_FAIL,
             payload: error.response && error.response.data.detail
                 ? error.response.data.detail
                 : error.message,

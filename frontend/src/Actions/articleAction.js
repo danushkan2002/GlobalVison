@@ -1,23 +1,24 @@
 import {
-    POST_RESULT_REQUEST,
-    POST_RESULT_SUCCESS,
-    POST_RESULT_FAIL,
+    POST_ARTICLE_REQUEST,
+    POST_ARTICLE_SUCCESS,
+    POST_ARTICLE_FAIL,
 
-    GET_RESULTS_REQUEST,
-    GET_RESULTS_SUCCESS,
-    GET_RESULTS_FAIL,
+    GET_ARTICLES_REQUEST,
+    GET_ARTICLES_SUCCESS,
+    GET_ARTICLES_FAIL,
 
-    GET_RESULT_REQUEST,
-    GET_RESULT_SUCCESS,
-    GET_RESULT_FAIL,
-} from '../constants/ResultConstents'
+    GET_ARTICLE_REQUEST,
+    GET_ARTICLE_SUCCESS,
+    GET_ARTICLE_FAIL,
+    
+} from '../constants/articleConstents'
 import axios from "axios";
 
 
-export const createResult = (student_id, course_id, vocabulary, grammar, speaking_and_listening, writing, reading) => async(dispatch, getState) => {
+export const createArticle = (creator_name, category) => async(dispatch, getState) => {
     try{
         dispatch({
-            type : POST_RESULT_REQUEST
+            type : POST_ARTICLE_REQUEST
         })
 
         const {
@@ -31,19 +32,19 @@ export const createResult = (student_id, course_id, vocabulary, grammar, speakin
             }
         }
         const {data} = await axios.post(
-            '/api/results/create/',
-            {'student_id': student_id, 'course_id':course_id, 'vocabulary': vocabulary, 'grammar':grammar, 'speaking_and_listening': speaking_and_listening, 'writing': writing, 'reading': reading},
+            '/api/articles/create/',
+            {'creator_name': creator_name, 'category':category},
             config
         )
 
         dispatch({
-            type : POST_RESULT_SUCCESS,
+            type : POST_ARTICLE_SUCCESS,
             payload : data
         })
 
     } catch(error) {
         dispatch({
-            type : POST_RESULT_FAIL,
+            type : POST_ARTICLE_FAIL,
             payload: error.response && error.response.data.detail
                 ? error.response.data.detail
                 : error.message,
@@ -51,36 +52,31 @@ export const createResult = (student_id, course_id, vocabulary, grammar, speakin
     }
 }
 
-export const getResults = () => async(dispatch, getState) => {
+export const getArticles = (cat) => async(dispatch) => {
     try {
         dispatch({
-            type:GET_RESULTS_REQUEST
+            type:GET_ARTICLES_REQUEST
         })
         
-        const {
-            userLogin : {userInfo},
-        } = getState()
-
         const config = {
             headers : {
                 'Content-type':'application/json',
-                Authorization : `Bearer ${userInfo.token}`
             }
         }
 
         const {data} = await axios.get(
-            `/api/results/`,
+            `/api/articles/${cat}`,
             config
         )
 
         dispatch({
-            type : GET_RESULTS_SUCCESS,
+            type : GET_ARTICLES_SUCCESS,
             payload : data
         })
 
     } catch(error) {
         dispatch({
-            type : GET_RESULTS_FAIL,
+            type : GET_ARTICLES_FAIL,
             payload: error.response && error.response.data.detail
                 ? error.response.data.detail
                 : error.message,
@@ -89,12 +85,12 @@ export const getResults = () => async(dispatch, getState) => {
 }
 
 
-export const getResult = (id) => async(dispatch) => {
+export const getArticle = (cat,id) => async(dispatch) => {
     try {
         dispatch({
-            type:GET_RESULT_REQUEST
+            type:GET_ARTICLE_REQUEST
         })
-
+        
         const config = {
             headers : {
                 'Content-type':'application/json',
@@ -102,18 +98,18 @@ export const getResult = (id) => async(dispatch) => {
         }
 
         const {data} = await axios.get(
-            `/api/results/${id}/`,
+            `/api/articles/${cat}/${id}`,
             config
         )
 
         dispatch({
-            type : GET_RESULT_SUCCESS,
+            type : GET_ARTICLE_SUCCESS,
             payload : data
         })
 
     } catch(error) {
         dispatch({
-            type : GET_RESULT_FAIL,
+            type : GET_ARTICLE_FAIL,
             payload: error.response && error.response.data.detail
                 ? error.response.data.detail
                 : error.message,

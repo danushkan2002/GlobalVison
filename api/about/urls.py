@@ -3,7 +3,7 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.getProjects, name='Get-Projects'),
-
-    # path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('create/', views.postCourse, name='Create_Application'),
+    path('', views.getProjects, name='Get_Applications'),
+    path('<str:pk>/', views.getProject, name='Get_Application'),
 ]

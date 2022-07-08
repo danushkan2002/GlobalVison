@@ -51,6 +51,10 @@ const Navbar = () => {
                             <Link className='px-2' to={'/results/'}> results</Link>
                             <span>|</span>
                             <Link className='px-2' to={'/add_course/'}> Add course</Link>
+                            <span>|</span>
+                            <Link className='px-2' to={'/add_project/'}> Add Project</Link>
+                            <span>|</span>
+                            <Link className='px-2' to={'/add_article/'}> Add Article</Link>
                         </div>
                     ) : (
                         <div>
@@ -61,16 +65,24 @@ const Navbar = () => {
                             <Link className='px-2' to={'/learn/'}>Learn</Link>
                             <span>|</span>
                             <Link className='px-2' to={'/review/'}>review</Link>
+                            <span>|</span>
+                            <Link className='px-2' to={'/articles/'}>Article</Link>
+                            
                         </div>
                     )
                 ) : (
                 <div>
-                <Link className='px-2' to={'/login'}> login</Link>
+                <Link className='px-2' to={'/login/'}>Login</Link>
                 <span>|</span>
-                <Link className='px-2' to={'/application'}>Application</Link>
+                <Link className='px-2' to={'/application/'}>Application</Link>
                 <span>|</span>
                 <Link className='px-2' to={'/courses/'}>Courses</Link>
+                <span>|</span>
+                <Link className='px-2' to={'/projects/'}>projects</Link>
+                <span>|</span>
+                <Link className='px-2' to={'/articles/'}>Article</Link>
                 </div>
+                
                 
             )}
         </div>

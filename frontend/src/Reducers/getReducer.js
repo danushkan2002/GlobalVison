@@ -6,8 +6,12 @@ import { GET_SCHOOL_REQUEST,
         GET_SUBJECT_CATEGORY_REQUEST,
         GET_SUBJECT_CATEGORY_SUCCESS,
         GET_SUBJECT_CATEGORY_FAIL,
-
         GET_SUBJECT_CATEGORY_RESET,
+        
+        GET_ARTICLE_CATEGORY_REQUEST,
+        GET_ARTICLE_CATEGORY_SUCCESS,
+        GET_ARTICLE_CATEGORY_FAIL,
+        GET_ARTICLE_CATEGORY_RESET,
         
 } from "../constants/getConstents"
 
@@ -22,7 +26,7 @@ export const schoolDataReducer = (state = { school:[] }, action) => {
         case  GET_SCHOOL_FAIL:
             return {schoolLoading: false, schoolerror: action.payload}
 
-        case  GET_SUBJECT_CATEGORY_RESET:
+        case  GET_SCHOOL_RESET:
             return {school:[]}
 
         default:
@@ -44,6 +48,25 @@ export const subjectCategoryReducer = (state = { subjectsCategories:[] }, action
 
         case  GET_SUBJECT_CATEGORY_RESET:
             return {subjectsCategories:[]}
+    
+        default:
+            return state
+    }
+}
+
+export const articleCategoryReducer = (state = { articlesCategories:[] }, action) => {
+    switch(action.type) {
+        case  GET_ARTICLE_CATEGORY_REQUEST:
+            return {...state, articlesCategoriesLoading: true}
+
+        case  GET_ARTICLE_CATEGORY_SUCCESS:
+            return {articlesCategoriesLoading: false, articlesCategories: action.payload}
+
+        case  GET_ARTICLE_CATEGORY_FAIL:
+            return {articlesCategoriesLoading: false, articlesCategoriesError: action.payload}
+
+        case  GET_ARTICLE_CATEGORY_RESET:
+            return {articlesCategories:[]}
     
         default:
             return state

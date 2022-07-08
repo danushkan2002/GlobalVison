@@ -25,6 +25,13 @@ import ResultScreen from './Screens/ResultScreen';
 import CourseFromScreen from './Screens/CourseFromScreen';
 import CoursesScreen from './Screens/CoursesScreen';
 import CourseScreen from './Screens/CourseScreen';
+import ProjectFormScreen from './Screens/ProjectFormScreen';
+import ProjectsScreen from './Screens/ProjectsScreen';
+import ProjectScreen from './Screens/ProjectScreen';
+import ArticlesCategoryScreen from './Screens/ArticlesCategoryScreen';
+import ArticlesByCategoryScreen from './Screens/ArticlesByCategoryScreen';
+import ArticleScreen from './Screens/ArticleScreen';
+import ArticleFormScreen from './Screens/ArticleFormScreen';
 
 function App() {
   return (
@@ -50,6 +57,8 @@ function App() {
           <Route path='/add_result/' element={<ResultFormScreen/>}/>
           <Route path='/results/' element={<ResultsScreen/>}/>
           <Route path='/add_course/' element={<CourseFromScreen/>}/>
+          <Route path='/add_project/' element={<ProjectFormScreen/>}/>
+          <Route path='/add_article/' element={<ArticleFormScreen/>}/>
           
         </Route>
 
@@ -62,7 +71,11 @@ function App() {
         <Route path='/' element={<HomeScreen/>} />
         <Route path='/courses/' element={<CoursesScreen/>}/>
         <Route path='/courses/:id/' element={<CourseScreen/>}/>
-        
+        <Route path='/projects/' element={<ProjectsScreen/>}/>
+        <Route path='/projects/:id' element={<ProjectScreen/>}/>
+        <Route path='/articles/' element={<ArticlesCategoryScreen/>}/>
+        <Route path='/articles/:cat/' element={<ArticlesByCategoryScreen/>}/>
+        <Route path='/articles/:cat/:id/' element={<ArticleScreen/>}/>     
         
       </Routes>
     </Router>

@@ -7,4 +7,4 @@ from .models import Projects
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Projects
-        fields = '__all__'
+        fields = ['id','content', 'place_name']
