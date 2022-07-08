@@ -19,6 +19,12 @@ import UserScreen from './Screens/UserScreen';
 import MessagesScreen from './Screens/MessagesScreen';
 import MessageFormScreen from './Screens/MessageFormScreen';
 import MessageScreen from './Screens/MessageScreen';
+import ResultFormScreen from './Screens/ResultFormScreen';
+import ResultsScreen from './Screens/ResultsScreen';
+import ResultScreen from './Screens/ResultScreen';
+import CourseFromScreen from './Screens/CourseFromScreen';
+import CoursesScreen from './Screens/CoursesScreen';
+import CourseScreen from './Screens/CourseScreen';
 
 function App() {
   return (
@@ -41,15 +47,21 @@ function App() {
           <Route path='/users/:id/' element={<UserScreen/>}/>
           <Route path='/inbox/' element={<MessagesScreen/>}/>
           <Route path='/inbox/:id' element={<MessageScreen/>}/>
+          <Route path='/add_result/' element={<ResultFormScreen/>}/>
+          <Route path='/results/' element={<ResultsScreen/>}/>
+          <Route path='/add_course/' element={<CourseFromScreen/>}/>
+          
         </Route>
 
         <Route element={<UnPrivateRoute/>}>
           <Route path='/application/' element={<ApplicationFormScreen/>}/>
           
         </Route>
-
+        <Route path='/result/:id' element={<ResultScreen/>}/>
         <Route path='/login/' element={<LoginScreen/>}/>
         <Route path='/' element={<HomeScreen/>} />
+        <Route path='/courses/' element={<CoursesScreen/>}/>
+        <Route path='/courses/:id/' element={<CourseScreen/>}/>
         
         
       </Routes>

@@ -9,7 +9,7 @@ class UserSerializer(serializers.ModelSerializer):
     age_category = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = UserAccount
-        fields = ['id', 'username', 'birth_year', 'student_id', 'school_name' ,'phone_number', 'age_category', 'is_admin']
+        fields = ['id', 'username', 'birth_year', 'student_id', 'school_name' ,'phone_number', 'age_category', 'is_admin', 'is_superadmin']
 
     def get_age_category(self, obj):
         if obj.birth_year :

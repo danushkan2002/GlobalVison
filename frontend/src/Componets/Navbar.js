@@ -47,6 +47,10 @@ const Navbar = () => {
                             <Link className='px-2' to={'/applications/'}> applications</Link>
                             <span>|</span>
                             <Link className='px-2' to={'/inbox/'}> Inbox</Link>
+                            <span>|</span>
+                            <Link className='px-2' to={'/results/'}> results</Link>
+                            <span>|</span>
+                            <Link className='px-2' to={'/add_course/'}> Add course</Link>
                         </div>
                     ) : (
                         <div>
@@ -64,6 +68,8 @@ const Navbar = () => {
                 <Link className='px-2' to={'/login'}> login</Link>
                 <span>|</span>
                 <Link className='px-2' to={'/application'}>Application</Link>
+                <span>|</span>
+                <Link className='px-2' to={'/courses/'}>Courses</Link>
                 </div>
                 
             )}

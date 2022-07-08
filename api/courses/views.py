@@ -8,8 +8,10 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 # Create your views here.
 
 @api_view(['POST'])
+@permission_classes([IsAdminUser])
 def postCourse(request):
-    data = request.data(
+    data = request.data
+    course = Course.objects.create(
         course_name = data['course_name'],
         course_duration_in_month_count = data['course_duration_in_month_count'],
         course_id = data['course_id'],
@@ -17,7 +19,7 @@ def postCourse(request):
         starting_date = data['starting_date'],
         
     )
-    serializer = CourseSerializer(data, many=False)
+    serializer = CourseSerializer(course, many=False)
     return Response(serializer.data)
 
 
@@ -29,7 +31,7 @@ def getCourses(request):
 
 @api_view(['GET'])
 def getCourse(request, pk):
-    results = Course.objects.filter(id=pk)
-    serializer = CourseSerializer(results, many=True)
+    results = Course.objects.get(id=pk)
+    serializer = CourseSerializer(results, many=False)
     return Response(serializer.data)
 

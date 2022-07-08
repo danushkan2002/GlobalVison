@@ -14,8 +14,10 @@ const AdminRoute = () => {
             dispatch(getUserDetails())
         }
     },[userProfile, dispatch])
-  return ( userProfile.is_admin ? <Outlet/> : <Navigate to='/'/>
-    
+  return ( 
+    userProfile ?
+        userProfile.is_admin && userProfile.is_superadmin ? <Outlet/> : <Navigate to='/'/>:
+        <Navigate to={'/'}/>    
   )
 }
 

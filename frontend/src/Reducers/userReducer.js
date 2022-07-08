@@ -66,7 +66,7 @@ export const userRegisterReducer = (state = {}, action ) => {
     }
 }
 
-export const userProfileDataReducer = (state = { userProfile: {} }, action) => {
+export const userProfileDataReducer = (state = { userProfile:{}}, action) => {
     switch(action.type) {
         case USER_DETAILS_REQUEST:
             return {...state, loading: true}

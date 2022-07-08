@@ -1,22 +1,23 @@
-import axios from "axios";
 import {
-    POST_MESSAGE_REQUEST,
-    POST_MESSAGE_SUCCESS,
-    POST_MESSAGE_FAIL,
+    POST_RESULT_REQUEST,
+    POST_RESULT_SUCCESS,
+    POST_RESULT_FAIL,
 
-    GET_MESSAGES_REQUEST,
-    GET_MESSAGES_SUCCESS,
-    GET_MESSAGES_FAIL,
+    GET_RESULTS_REQUEST,
+    GET_RESULTS_SUCCESS,
+    GET_RESULTS_FAIL,
 
-    GET_MESSAGE_REQUEST,
-    GET_MESSAGE_SUCCESS,
-    GET_MESSAGE_FAIL,
-} from '../constants/inboxConstents'
+    GET_RESULT_REQUEST,
+    GET_RESULT_SUCCESS,
+    GET_RESULT_FAIL,
+} from '../constants/ResultConstents'
+import axios from "axios";
 
-export const createMessage = (username, email, subject, content) => async(dispatch) => {
+
+export const createResult = (student_id, course_id, vocabulary, grammar, speaking_and_listening, writing, reading) => async(dispatch) => {
     try{
         dispatch({
-            type : POST_MESSAGE_REQUEST
+            type : POST_RESULT_REQUEST
         })
 
         const config = {
@@ -25,19 +26,19 @@ export const createMessage = (username, email, subject, content) => async(dispat
             }
         }
         const {data} = await axios.post(
-            '/api/inbox/create/',
-            {'username': username, 'email':email, 'subject': subject, 'content': content},
+            '/api/results/create/',
+            {'student_id': student_id, 'course_id':course_id, 'vocabulary': vocabulary, 'grammar':grammar, 'speaking_and_listening': speaking_and_listening, 'writing': writing, 'reading': reading},
             config
         )
 
         dispatch({
-            type : POST_MESSAGE_SUCCESS,
+            type : POST_RESULT_SUCCESS,
             payload : data
         })
 
     } catch(error) {
         dispatch({
-            type : POST_MESSAGE_FAIL,
+            type : POST_RESULT_FAIL,
             payload: error.response && error.response.data.detail
                 ? error.response.data.detail
                 : error.message,
@@ -45,11 +46,10 @@ export const createMessage = (username, email, subject, content) => async(dispat
     }
 }
 
-
-export const getMessages = () => async(dispatch, getState) => {
+export const getResults = () => async(dispatch, getState) => {
     try {
         dispatch({
-            type:GET_MESSAGES_REQUEST
+            type:GET_RESULTS_REQUEST
         })
         
         const {
@@ -64,18 +64,18 @@ export const getMessages = () => async(dispatch, getState) => {
         }
 
         const {data} = await axios.get(
-            `/api/inbox/`,
+            `/api/results/`,
             config
         )
 
         dispatch({
-            type : GET_MESSAGES_SUCCESS,
+            type : GET_RESULTS_SUCCESS,
             payload : data
         })
 
     } catch(error) {
         dispatch({
-            type : GET_MESSAGES_FAIL,
+            type : GET_RESULTS_FAIL,
             payload: error.response && error.response.data.detail
                 ? error.response.data.detail
                 : error.message,
@@ -84,36 +84,31 @@ export const getMessages = () => async(dispatch, getState) => {
 }
 
 
-export const getMessage = (id) => async(dispatch, getState) => {
+export const getResult = (id) => async(dispatch) => {
     try {
         dispatch({
-            type:GET_MESSAGE_REQUEST
+            type:GET_RESULT_REQUEST
         })
 
-        const {
-            userLogin : {userInfo},
-        } = getState()
-        
         const config = {
             headers : {
                 'Content-type':'application/json',
-                Authorization : `Bearer ${userInfo.token}`
             }
         }
 
         const {data} = await axios.get(
-            `/api/inbox/${id}/`,
+            `/api/results/${id}/`,
             config
         )
 
         dispatch({
-            type : GET_MESSAGE_SUCCESS,
+            type : GET_RESULT_SUCCESS,
             payload : data
         })
 
     } catch(error) {
         dispatch({
-            type : GET_MESSAGE_FAIL,
+            type : GET_RESULT_FAIL,
             payload: error.response && error.response.data.detail
                 ? error.response.data.detail
                 : error.message,

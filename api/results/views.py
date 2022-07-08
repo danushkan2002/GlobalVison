@@ -30,7 +30,7 @@ def getResults(request):
 
 @api_view(['GET'])
 def getResult(request, pk):
-    results = Result.objects.filter(id=pk)
-    serializer = ResultSerializer(results, many=True)
+    results = Result.objects.get(id=pk)
+    serializer = ResultSerializer(results, many=False)
     return Response(serializer.data)
 

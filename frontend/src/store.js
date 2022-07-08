@@ -6,6 +6,8 @@ import { schoolDataReducer, subjectCategoryReducer, } from './Reducers/getReduce
 import { subjectsByCategoryReducer, subjectByCategoryReducer } from './Reducers/subjectReducer'
 import { applicationCreateReducer, applicationDataReducer, applicationsDataReducer } from './Reducers/applicationReducer'
 import { messageCreateDataReducer, messageDataReducer, messagesDataReducer } from './Reducers/inboxReducer'
+import { resultCreateDataReducer, resultDataReducer, resultsDataReducer } from './Reducers/ResultReducer'
+import { courseCreateDataReducer, courseDataReducer, coursesDataReducer } from './Reducers/courseReducer'
 
 const reducer = combineReducers({
     userLogin : userLoginReducer,
@@ -27,6 +29,14 @@ const reducer = combineReducers({
     messageCreateData : messageCreateDataReducer,
     messagesData: messagesDataReducer,
     messageData: messageDataReducer,
+
+    resultCreateData : resultCreateDataReducer,
+    resultsData: resultsDataReducer,
+    resultData : resultDataReducer,
+
+    courseCreateData : courseCreateDataReducer,
+    coursesData: coursesDataReducer,
+    courseData : courseDataReducer,
 
 })
 

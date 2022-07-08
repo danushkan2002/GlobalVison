@@ -12,7 +12,7 @@ import {
     GET_MESSAGE_SUCCESS,
     GET_MESSAGE_FAIL,
     GET_MESSAGE_RESET,
-} from '../constants/inboxConstants'
+} from '../constants/inboxConstents'
 
 export const messageCreateDataReducer = (state = {} , action) => {
     switch(action.type){
