@@ -8,6 +8,7 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 # Create your views here.
 
 @api_view(['POST'])
+@permission_classes([IsAdminUser])
 def postResult(request):
     data = request.data(
         student_id = data['student_id'],
@@ -23,6 +24,7 @@ def postResult(request):
 
 
 @api_view(['GET'])
+@permission_classes([IsAdminUser])
 def getResults(request):
     results = Result.objects.all()
     serializer = ResultSerializer(results, many=True)

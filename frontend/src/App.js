@@ -36,7 +36,7 @@ import ArticleFormScreen from './Screens/ArticleFormScreen';
 function App() {
   return (
     <Router>
-      <Navbar/>
+      <Navbar>
       <Routes>
         <Route  element={<PrivateRoute/>}>
           <Route path='/profile/' element={<ProfileScreen/>} />
@@ -54,7 +54,7 @@ function App() {
           <Route path='/users/:id/' element={<UserScreen/>}/>
           <Route path='/inbox/' element={<MessagesScreen/>}/>
           <Route path='/inbox/:id' element={<MessageScreen/>}/>
-          <Route path='/add_result/' element={<ResultFormScreen/>}/>
+          <Route path='/addResult/' element={<ResultFormScreen/>}/>
           <Route path='/results/' element={<ResultsScreen/>}/>
           <Route path='/add_course/' element={<CourseFromScreen/>}/>
           <Route path='/add_project/' element={<ProjectFormScreen/>}/>
@@ -66,7 +66,7 @@ function App() {
           <Route path='/application/' element={<ApplicationFormScreen/>}/>
           
         </Route>
-        <Route path='/result/:id' element={<ResultScreen/>}/>
+        <Route path='/result/' element={<ResultScreen/>}/>
         <Route path='/login/' element={<LoginScreen/>}/>
         <Route path='/' element={<HomeScreen/>} />
         <Route path='/courses/' element={<CoursesScreen/>}/>
@@ -78,6 +78,7 @@ function App() {
         <Route path='/articles/:cat/:id/' element={<ArticleScreen/>}/>     
         
       </Routes>
+      </Navbar>
     </Router>
   );
 }
