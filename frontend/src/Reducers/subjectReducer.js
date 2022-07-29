@@ -38,10 +38,10 @@ export const subjectByCategoryReducer = (state = { subject: {} }, action) => {
             return {...state, subjectLoading: true}
 
         case GET_SUBJECT_BY_CATEGORY_SUCCESS:
-            return {subjectloading: false, subject: action.payload}
+            return {subjectLoading: false, subject: action.payload}
 
         case GET_SUBJECT_BY_CATEGORY_FAIL:
-            return {subjectloading: false, subjecterror: action.payload}
+            return {subjectLoading: false, subjectError: action.payload}
 
         case GET_SUBJECT_BY_CATEGORY_RESET:
             return {}

@@ -32,7 +32,7 @@ def getResults(request):
 
 @api_view(['GET'])
 def getResult(request, pk):
-    results = Result.objects.get(id=pk)
-    serializer = ResultSerializer(results, many=False)
+    result = Result.objects.get(student_id=pk)
+    serializer = ResultSerializer(result, many=False)
     return Response(serializer.data)
 

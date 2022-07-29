@@ -1,9 +1,7 @@
 import React,{ useEffect, useState} from 'react'
 import { getResult } from '../Actions/resultAction'
 import { useDispatch, useSelector } from 'react-redux/es/exports';
-import Loader from '../Componets/Loader'
-import { useParams  } from 'react-router-dom'
-import Message from '../Componets/Message'
+
 import { HiSearch } from 'react-icons/hi'
 
 
@@ -23,7 +21,7 @@ const ResultScreen = () => {
 
   const submitHandler = (e) => {
     e.preventDefault()
-    dispatch(getResult(parseInt(studentID)))
+    dispatch(getResult(studentID))
   }
 
   return (
@@ -40,15 +38,12 @@ const ResultScreen = () => {
               result ?
               (
                 <div className='lg:ml-auto w-72 h-16 flex items-center mx-auto lg:mx-0'>
-                  <div className=''>
-                    <p className='text-white font-Heebo text-m-sub-title lg:text-w-sub-title'>Monika</p>
-                    <hr className='border-10'></hr>
-                    <p className='text-white font-Heebo text-m-simple-title lg:text-w-simple-title'>#{result.student_id}</p>
-                  </div>
                   <div className='ml-auto'>
-                    <img src='https://bestprofilepictures.com/wp-content/uploads/2021/04/Awesome-Profile-Pic.jpg' className='object-cover rounded-full h-16 w-16'/>
+                  <p className='text-white font-Heebo text-m-simple-title lg:text-w-simple-title'>#{result.student_id}</p>
+                    <hr className='border-10'></hr>
+                    
                   </div>
-
+                  
                 </div>
               ) : (
                 ''

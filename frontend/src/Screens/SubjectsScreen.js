@@ -27,7 +27,7 @@ const SubjectByCategoryScreen = () => {
           (
             subjects.map((subject) => (
               
-            <Link to={`/learn/${subject.id}`}  key={subject.id} className='bg-white shadow-base w-80 md:w-448 lg:w-512 h-28 lg:h-36 mx-auto shadow-m mb-7 lg:mb-8 rounded-xl flex'>
+            <Link to={`/learn/${cat}/${subject.id}`}  key={subject.id} className='bg-white shadow-base w-80 md:w-448 lg:w-512 h-28 lg:h-36 mx-auto shadow-m mb-7 lg:mb-8 rounded-xl flex'>
                 <div className='my-auto h-fit w-full px-8'>
                     <div className='flex items-center'>
                         <p className='text-xl lg:text-2xl font-Heebo font-medium '>{subject.subject_name}</p>

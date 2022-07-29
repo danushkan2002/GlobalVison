@@ -72,6 +72,10 @@ const Navbar = ({children}) => {
                       <Link to={'/review'}  onClick={Navbarhandler} className='ml-25px text-m-text lg:text-w-text font-Qu text-gray-900 h-50px flex items-center border-l-2 px-25px border-l-white hover:border-l-2 hover:border-10'>
                         <p className=''>Review</p>
                       </Link>
+                      <button onClick={logoutHandler && Navbarhandler}  className='fixed bottom-25px right-25px left-25px md:right-14 md:left-14
+                      lg:right-28 lg:left-28 xl:right-32 xl:left-32 px-25px py-2 rounded-xl border-2 border-30 text-m-text lg:text-w-text font-Qu text-30 hover:text-white hover:bg-30'>
+                          <p className=' '>Logout</p>
+                        </button>
                     </div>
                   ) : (
                     <div>
@@ -84,21 +88,31 @@ const Navbar = ({children}) => {
                       <Link to={'/review'}  onClick={Navbarhandler} className='ml-25px text-m-text lg:text-w-text font-Qu text-gray-900 h-50px flex items-center border-l-2 px-25px border-l-white hover:border-l-2 hover:border-10'>
                         <p className=''>Review</p>
                       </Link>
+                      <button onClick={logoutHandler && Navbarhandler}  className='fixed bottom-25px right-25px left-25px md:right-14 md:left-14
+                      lg:right-28 lg:left-28 xl:right-32 xl:left-32 px-25px py-2 rounded-xl border-2 border-30 text-m-text lg:text-w-text font-Qu text-30 hover:text-white hover:bg-30'>
+                          <p className=' '>Logout</p>
+                        </button>
                       
                     </div>
                   )
                 ): (
-                  <Link to='/review'  onClick={Navbarhandler} className='ml-25px text-m-text lg:text-w-text font-Qu text-gray-900 h-50px flex items-center border-l-2 px-25px border-l-white hover:border-l-2 hover:border-10'>
-                    <p className=''>Review</p>
-                  </Link>
+                  <div>
+                    <Link to='/review'  onClick={Navbarhandler} className='ml-25px text-m-text lg:text-w-text font-Qu text-gray-900 h-50px flex items-center border-l-2 px-25px border-l-white hover:border-l-2 hover:border-10'>
+                      <p className=''>Review</p>
+                    </Link>
+                    <Link to={'/result'}  onClick={Navbarhandler} className='ml-25px text-m-text lg:text-w-text font-Qu text-gray-900 h-50px flex items-center border-l-2 px-25px border-l-white hover:border-l-2 hover:border-10'>
+                        <p className=''>Result</p>
+                      </Link>
+                    <Link to={'/login'}  onClick={Navbarhandler} className='fixed bottom-25px right-25px left-25px md:right-14 md:left-14
+                    lg:right-28 lg:left-28 xl:right-32 xl:left-32 px-25px py-2 rounded-xl border-2 border-30 text-m-text lg:text-w-text font-Qu text-30 hover:text-white hover:bg-30'>
+                        <p className=' '>Login</p>
+                      </Link>
+                  </div>
                 )
               }
 
 
-              <Link to={'/login'}  onClick={Navbarhandler} className='fixed bottom-25px right-25px left-25px md:right-14 md:left-14
-              lg:right-28 lg:left-28 xl:right-32 xl:left-32 px-25px py-2 rounded-xl border-2 border-30 text-m-text lg:text-w-text font-Qu text-30 hover:text-white hover:bg-30'>
-                  <p className=' '>Login</p>
-                </Link>
+              
             </div>
           </div>
         </div>
@@ -115,7 +129,7 @@ const Navbar = ({children}) => {
                 userInfo ? (
                     (userInfo.is_admin && userInfo.is_superadmin) ? (
                         <div className='lg:flex h-fit ml-auto hidden'>
-                            <Link to={'/addResult'} className='ml-25px my-auto text-m-text lg:text-w-text font-Qu text-gray-900 py-2 border-b-2 border-b-white hover:border-b-2 hover:border-10'>
+                            <Link to={'/result'} className='ml-25px my-auto text-m-text lg:text-w-text font-Qu text-gray-900 py-2 border-b-2 border-b-white hover:border-b-2 hover:border-10'>
                                 <p className=''>Add Result</p>
                             </Link>
                             <Link to={'/register'} className='ml-25px my-auto text-m-text lg:text-w-text font-Qu text-gray-900 py-2 border-b-2 border-b-white hover:border-b-2 hover:border-10'>
@@ -132,6 +146,9 @@ const Navbar = ({children}) => {
                         <div className='lg:flex h-fit ml-auto hidden'>
                             <Link to={'/learn'} className='ml-25px my-auto text-m-text lg:text-w-text font-Qu text-gray-900 py-2 border-b-2 border-b-white hover:border-b-2 hover:border-10'>
                                 <p className=''>Learn</p>
+                            </Link>
+                            <Link to={'/result'} className='ml-25px my-auto text-m-text lg:text-w-text font-Qu text-gray-900 py-2 border-b-2 border-b-white hover:border-b-2 hover:border-10'>
+                                <p className=''>Result</p>
                             </Link>
                             <div className='ml-25px my-auto text-m-text lg:text-w-text font-Qu text-gray-900 py-2 border-b-2 border-b-white hover:border-b-2 hover:border-10'>
                                 <p className=''>Review</p>
