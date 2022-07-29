@@ -3,18 +3,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { logout } from '../Actions/userAction'
 import { getUserDetails } from '../Actions/userAction'
-import Loader from './Loader'
 import {IoLogoFirebase} from 'react-icons/io5'
 
-import Message from './Message'
-import {HiChartPie, HiMenu, HiUserCircle, HiSearch, HiX,HiOutlineChevronUp} from 'react-icons/hi'
+import { HiMenu, HiOutlineChevronUp} from 'react-icons/hi'
 
 
 
 const Navbar = ({children}) => {
     const [ menu , setMenu] = useState(false)
     const userLogin = useSelector(state => state.userLogin)
-    const {userInfo, error, loading } = userLogin 
+    const {userInfo,  } = userLogin 
         
     const history = useNavigate()
     const dispatch = useDispatch()
